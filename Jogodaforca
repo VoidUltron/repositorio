@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void forca(int estado) {
+    if (estado == 0) {
+        printf("\n|---------|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 1) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 2) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|        /");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 3) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|        /|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 4) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|        /|\\");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 5) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|        /|\\");
+        printf("\n|        /");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n-");
+    } else if (estado == 6) {
+        printf("\n|---------|");
+        printf("\n|         0");
+        printf("\n|        /|\\");
+        printf("\n|        / \\");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n|");
+        printf("\n- GAME OVER! ");
+
+    }
+}
+
+int main() {
+    int erros = 0;
+    char palavra_chave[100];
+    printf("Escreva a palavra secreta: ");
+    fgets(palavra_chave, 100, stdin);
+    printf("Palavra: %s", palavra_chave);
+    system("cls");
+    printf("A palavra secreta tem: %lu caracteres\n", strlen(palavra_chave) - 1);
+
+    char palavra_tela[100];
+    strcpy(palavra_tela, palavra_chave);
+    for (int i = 0; i < strlen(palavra_tela) - 1; i++) {
+        palavra_tela[i] = '_';
+    }
+
+    while (1) {
+        forca(erros);
+        printf("\nEscreva uma letra: ");
+        for (int i = 0; i < strlen(palavra_tela) - 1; i++) {
+            printf("%c ", palavra_tela[i]);
+
+        }
+        printf("\nLetra: ");
+        char letra;
+        scanf(" %c", &letra);
+        system("cls");
+
+        int errado_ou_certo = 1;
+        for (int i = 0; i < strlen(palavra_tela) - 1; i++) {
+            if (letra == palavra_chave[i]) {
+                palavra_tela[i] = letra;
+                errado_ou_certo = 0;
+                system("cls");
+            }
+        }
+        if (errado_ou_certo == 1) {
+            erros++;
+
+        }
+        if (erros == 6) {
+            forca(erros);
+            printf("PALAVRA:%s",palavra_chave);
+            break;
+
+        }
+            if(strcmp(palavra_tela,palavra_chave)==0){
+                printf("YOU WIN!\n");
+                printf("PALAVRA:%s",palavra_tela);
+                break;
+            }
+
+    }
+
+    return 0;
+}
